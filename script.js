@@ -1,7 +1,14 @@
-// var name1="file1"
-// console.log(name1);
+function fetchRandomDogImage(){
+    var xhrRequest = new XMLHttpRequest();
+    xhrRequest.onload = function(){
+        console.log(xhrRequest.response);
+        var responseJSON = JSON.parse(xhrRequest.response);
+        var imageUrl = responseJSON.message;
+        $('#dog-image').attr('src', imageUrl);
+    };
+    xhrRequest.open('get', 'https://dog.ceo/api/breeds/image/random', true);
+    // true - asynchronus, false - synchronus
+    xhrRequest.send();
+}
 
-var a = 10;
-setTimeout(function(){
-console.log(a);
-},1000);
+$('#fetch-dog-image-button').click(fetchRandomDogImage);
